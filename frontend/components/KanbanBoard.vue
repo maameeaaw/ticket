@@ -106,7 +106,7 @@ const handleTaskDrop = async ({ dropResult, columnId }) => {
   display: flex;
   justify-content: space-between;
   height: 48em;
-  max-width: 1200px;
+  max-width: 100%;
   overflow-x: auto;
 }
 .drag-class {

@@ -81,7 +81,7 @@
   </div>
 
   <!-- board -->
-  <div>
+  <div class="d-flex justify-center">
     <KanbanBoard :ticket="ticket" :on-fetch="fetchData" />
   </div>
 </template>
