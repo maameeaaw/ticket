@@ -1,0 +1,274 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API Service",
+    "version": "1.0.0",
+    "description": "API Service endpoints",
+    "contact": {
+      "email": "sidhant@panda.fyi",
+      "name": "Sidhant Panda"
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "ticket",
+      "description": "Ticket APIs"
+    }
+  ],
+  "paths": {
+    "/ticket/all": {
+      "get": {
+        "tags": [
+          "ticket"
+        ],
+        "summary": "Get all ticket in database",
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "integer",
+                      "description": "this is status of all ticket in tasks array",
+                      "example": 1
+                    },
+                    "tasks": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "66755eeda14b57b048c1ed62"
+                          },
+                          "title": {
+                            "type": "string",
+                            "example": "Do something"
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "I have to do something in the morning"
+                          },
+                          "contactInfo": {
+                            "type": "string",
+                            "example": "02-000-0000"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-06-21T11:07:25.146Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-06-21T11:07:25.146Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Tasks not found"
+          }
+        }
+      }
+    },
+    "/ticket/add": {
+      "post": {
+        "tags": [
+          "ticket"
+        ],
+        "summary": "add ticket to the database",
+        "operationId": "ticket-add",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "example": "title ticket"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "ticket description"
+                  },
+                  "contactInfo": {
+                    "type": "string",
+                    "example": "02-000-0000"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Saved"
+                    },
+                    "ticket": {
+                      "type": "object",
+                      "properties": {
+                        "title": {
+                          "type": "string",
+                          "example": "title ticket"
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": "ticket description"
+                        },
+                        "contactInfo": {
+                          "type": "string",
+                          "example": "02-000-0000"
+                        },
+                        "status": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "_id": {
+                          "type": "string",
+                          "example": "667558bd66664ea16ad7cb19"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2024-06-21T10:41:01.285Z"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time",
+                          "example": "2024-06-21T10:41:01.285Z"
+                        },
+                        "__v": {
+                          "type": "integer",
+                          "example": 0
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ticket/update/status": {
+      "post": {
+        "tags": [
+          "ticket"
+        ],
+        "summary": "update ticket status",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "id of ticket in database",
+                    "example": "667437c6f15ec1601bb32f31"
+                  },
+                  "status": {
+                    "type": "number",
+                    "description": "number of status 1 for pending, 2 for accepted, 3 for resolved, 4 for rejected",
+                    "example": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "status was updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Saved"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ticket/update/contact": {
+      "post": {
+        "tags": [
+          "ticket"
+        ],
+        "summary": "update ticket contact information",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "id of ticket in database",
+                    "example": "667437c6f15ec1601bb32f31"
+                  },
+                  "contactInfo": {
+                    "type": "string",
+                    "description": "Contact information",
+                    "example": "02-000-0000"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Contact information was updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Saved"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
